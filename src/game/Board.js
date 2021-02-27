@@ -1,4 +1,3 @@
-const ROWS = 10
 const COLS = 10
 
 const xyToOffset = (x, y) => {
@@ -28,10 +27,27 @@ class Board {
     return this.marbles
   }
 
+  getCell = (x, y) => {
+    const offset = xyToOffset(x, y)
+    return {
+      offset,
+      x,
+      y,
+      piece: this.pieceGrid[offset],
+      marble: this.marbleGrid[offset]
+    }
+  }
+
   getCells = () => {
     return this.pieceGrid.map((piece, offset) => {
       const [x, y] = offsetToXY(offset)
-      return { x, y, piece, marble: this.marbleGrid[offset] }
+      return {
+        offset,
+        x,
+        y,
+        piece,
+        marble: this.marbleGrid[offset],
+      }
     })
   }
 
