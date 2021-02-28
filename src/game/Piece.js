@@ -26,6 +26,10 @@ class Piece {
     return this.h
   }
 
+  getScore = () => {
+    return this.w * this.h
+  }
+
   getCells = () => {
     const cells = []
     for (let x = this.x; x < this.x + this.w; x++) {

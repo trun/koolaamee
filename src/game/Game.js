@@ -24,13 +24,69 @@ class Game {
     this.lastMove = lastMove
     this.lastLastMove = lastLastMove
     this.marblesRemaining = marblesRemaining
+
+    this.validMoves = this.computeValidMoves()
+    this.score = this.computeScore()
   }
 
   getBoard = () => {
     return this.board
   }
 
-  getValidMoves = () =>  {
+  getNextMove = () => {
+    return this.nextMove
+  }
+
+  getLastMove = () => {
+    return this.lastMove
+  }
+
+  getLastLastMove = () => {
+    return this.lastLastMove
+  }
+
+  getMarblesRemaining = () => {
+    return this.marblesRemaining
+  }
+
+  getScore = () => {
+    return this.score
+  }
+
+  getValidMoves = () => {
+    return this.validMoves
+  }
+
+  computeScore = () => {
+    const score = {
+      [PLAYER_A]: 0,
+      [PLAYER_B]: 0,
+    }
+
+    this.board.getPieces().forEach(piece => {
+      const pieceScore = {
+        [PLAYER_A]: 0,
+        [PLAYER_B]: 0,
+      }
+
+      piece.getCells().forEach(([x, y]) => {
+        const marble = this.board.getCell(x, y).marble
+        if (!!marble) {
+          pieceScore[marble.getColor()] += 1
+        }
+      })
+
+      if (pieceScore[PLAYER_A] > pieceScore[PLAYER_B]) {
+        score[PLAYER_A] += piece.getScore()
+      } else if (pieceScore[PLAYER_B] > pieceScore[PLAYER_A]) {
+        score[PLAYER_B] += piece.getScore()
+      }
+    })
+
+    return score
+  }
+
+  computeValidMoves = () =>  {
     if (!this.lastMove) {
       return this.board.getCells()
     }
@@ -39,6 +95,7 @@ class Game {
     const lastLastPiece = this.lastLastMove && this.board.getCell(this.lastLastMove.x, this.lastLastMove.y).piece
     const isValidCell = (cell) => {
       return cell.piece
+        && !cell.marble
         && cell.piece !== lastPiece
         && cell.piece !== lastLastPiece
     }
@@ -61,22 +118,19 @@ class Game {
   }
 
   makeMove = (x, y) => {
-    // TODO check if it's a valid move
     const nextBoard = this.board.clone()
     nextBoard.addMarble(new Marble(x, y, this.nextMove))
 
-    const nextGame = new Game({
+    return new Game({
       board: nextBoard,
       nextMove: this.nextMove === PLAYER_A ? PLAYER_B : PLAYER_A,
-      lastMove: { x, y },
+      lastMove: {x, y},
       lastLastMove: this.lastMove,
       marblesRemaining: {
         [PLAYER_A]: this.marblesRemaining[PLAYER_A] - (this.nextMove === PLAYER_A ? 1 : 0),
         [PLAYER_B]: this.marblesRemaining[PLAYER_B] - (this.nextMove === PLAYER_B ? 1 : 0),
       }
     })
-
-    return nextGame
   }
 }
 
