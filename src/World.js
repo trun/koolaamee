@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import cx from 'classnames'
 import Board from './game/Board'
 import Piece from './game/Piece'
 import Game from './game/Game'
@@ -31,6 +32,8 @@ function World() {
   const board = game.getBoard()
   const makeClickHandler = (x, y) => () => setGame(game.makeMove(x, y))
 
+  window.game = game
+
   const validMoves = game.getValidMoves()
   const validOffsets = validMoves.reduce((offsets, cell) => {
     offsets[cell.offset] = cell
@@ -57,6 +60,8 @@ function World() {
     }
   }
 
+  const ALPHA = 'ABCDEFGHIJKLMNOP'
+
   return (
     <div className="game">
       <div className="board">
@@ -72,22 +77,31 @@ function World() {
         ))}
         {board.getCells().map(cell => {
           const isValid = !!validOffsets[cell.offset]
+          const lastMove = game.getLastMove()
+          const lastLastMove = game.getLastLastMove()
+          const isLastMove = !!lastMove && lastMove.x === cell.x && lastMove.y === cell.y
+          const isLastLastMove = !!lastLastMove && lastLastMove.x === cell.x && lastLastMove.y === cell.y
           return (
             <div
               key={cell.offset}
               onClick={!!isValid ? makeClickHandler(cell.x, cell.y) : null}
-              className={`marble ${isValid && 'valid'} ${cell.marble && cell.marble.getClassName()}`}
+              className={cx({
+                marble: true,
+                valid: isValid,
+                [cell.marble && cell.marble.getClassName()]: !!cell.marble,
+                'last_move': isLastMove || isLastLastMove
+              })}
               style={{
                 gridColumn: `${cell.x + 1} / ${cell.x + 1}`,
                 gridRow: `${cell.y + 1} / ${cell.y + 1}`,
               }}
-            />
+            >{ALPHA.charAt(cell.x) + (cell.y + 1)}</div>
           )
         })}
       </div>
       <div className="game_info">
         <PlayerScore player="RED" game={game} winner={winner} />
-        <PlayerScore player="BLACK" game={game} winner={winner} />
+        <PlayerScore player="BLACK" game={game} winner={winner} setGame={setGame} />
       </div>
     </div>
   )

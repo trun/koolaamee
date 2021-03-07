@@ -17,14 +17,15 @@ class Game {
     nextMove = PLAYER_A,
     lastMove,
     lastLastMove,
+    moves = [],
     marblesRemaining = INITIAL_MARBLES
   }) {
     this.board = board
     this.nextMove = nextMove
     this.lastMove = lastMove
     this.lastLastMove = lastLastMove
+    this.moves = moves
     this.marblesRemaining = marblesRemaining
-
     this.validMoves = this.computeValidMoves()
     this.score = this.computeScore()
   }
@@ -43,6 +44,10 @@ class Game {
 
   getLastLastMove = () => {
     return this.lastLastMove
+  }
+
+  getMoves = () => {
+    return this.moves
   }
 
   getMarblesRemaining = () => {
@@ -126,6 +131,7 @@ class Game {
       nextMove: this.nextMove === PLAYER_A ? PLAYER_B : PLAYER_A,
       lastMove: {x, y},
       lastLastMove: this.lastMove,
+      moves: this.moves.concat([{x, y}]),
       marblesRemaining: {
         [PLAYER_A]: this.marblesRemaining[PLAYER_A] - (this.nextMove === PLAYER_A ? 1 : 0),
         [PLAYER_B]: this.marblesRemaining[PLAYER_B] - (this.nextMove === PLAYER_B ? 1 : 0),
