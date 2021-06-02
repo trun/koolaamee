@@ -1,3 +1,22 @@
 .player_score {
   width: 200px;
 }
+
+.player-BLACK {
+  color: black;
+}
+
+.player-RED {
+  color: red;
+}
+
+.is-player-turn {
+  text-decoration: underline;
+}
+
+.thinking {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}

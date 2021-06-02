@@ -100,7 +100,7 @@ function World() {
         })}
       </div>
       <div className="game_info">
-        <PlayerScore player="RED" game={game} winner={winner} />
+        <PlayerScore player="RED" game={game} winner={winner} setGame={setGame} />
         <PlayerScore player="BLACK" game={game} winner={winner} setGame={setGame} />
       </div>
     </div>
