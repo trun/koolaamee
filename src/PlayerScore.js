@@ -36,7 +36,7 @@ const PlayerScore = ({ player, game, winner, setGame }) => {
         setGame(game.makeMove(bestCell.x, bestCell.y))
       }
       setThinking(false)
-    }, 0)
+    }, delay)
   }
 
   const toggleAutoMove = () => {

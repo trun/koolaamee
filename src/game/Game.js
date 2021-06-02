@@ -14,7 +14,7 @@ const INITIAL_MARBLES = {
 class Game {
   constructor({
     board,
-    nextMove = PLAYER_A,
+    nextMove = PLAYER_B,
     lastMove,
     lastLastMove,
     moves = [],
