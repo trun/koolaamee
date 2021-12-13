@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Koo-laa-mee
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Javascript clone of a fun marble placement board game. Play with two players or against an AI.
 
-## Available Scripts
+![Screen Recording 2021-12-13 at 11 19 50 AM](https://p79.f0.n0.cdn.getcloudapp.com/items/bLudXYnn/d7990988-9e77-4565-8471-330fda437158.gif?source=viewer&v=59d0c58712e7263ff8d81de8c95046ab)
 
-In the project directory, you can run:
+## Rules
 
-### `yarn start`
+### Turns
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Each player takes turns placing a marble on an unoccupied, valid space. A valid space is one that...
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. is in the same row or column as the last marble your opponent placed
+2. is NOT on the same tile as the last marble your opponent placed
+3. is NOT on the same tile as the last marble YOU placed
 
-### `yarn test`
+For convenience, the most recently placed marbles for each player are marked with a white border, and all valid moves are indicated with a blue highlight.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Scoring
 
-### `yarn build`
+The game ends when either player has no valid moves on their turn OR both players have completely run out of marbles (each player starts with 28 marbles at the beginning of the game).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The score for each player is computed by the number of tiles that the play has "won". The score value for each tile is the number of mable spaces on that tile (i.e. a tile with six spaces is worth six points). A player wins a tile by having the majority of marbles on that tile at the end of the game. Tiles that are tied are worth no points for either player. For example...
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- On a six point tile, the red player has 3 marbles and the black player has 2 marbles - the red player earns 6 points and the black player earns 0 points.
+- On a six point tile, the red player has 3 marbles and the black player has 3 marbles - both players earn 0 points.
+- On a three point tile, the black player has 2 marbles and the red player has 1 marble - the black player earns 3 points and the red player earns 0 points.
+- On a three point tile, the black player has 3 marbles and the red player has no marbles - the black player earns 3 points and the red player earns 0 points.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The player with the most points once scores are tallied is the winner!
 
-### `yarn eject`
+## AI
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You can play against the AI by checking the "Auto move" box for either player. The AI uses a very simple [Minimax](https://en.wikipedia.org/wiki/Minimax) strategy, prioritizing game states that are not completely lost and using the current score of the board as a heuristic for all other states. The current strategy only searches to a fixed depth of 6 to balance between computation time and difficulty.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Work
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+There is currently only one static board included in the code. One of the interesting aspects of this game is that the players can generate a new board at the start of the game by taking turns placing tiles one by one, leading to each game being a totally unique strategic challenge. Game boards could also be randomly generated by computer which is probably a fun and interesting challenge for the future.
