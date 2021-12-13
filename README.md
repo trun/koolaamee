@@ -20,10 +20,11 @@ For convenience, the most recently placed marbles for each player are marked wit
 
 The game ends when either player has no valid moves on their turn OR both players have completely run out of marbles (each player starts with 28 marbles at the beginning of the game).
 
-The score for each player is computed by the number of tiles that the play has "won". The score value for each tile is the number of mable spaces on that tile (i.e. a tile with six spaces is worth six points). A player wins a tile by having the majority of marbles on that tile at the end of the game. Tiles that are tied are worth no points for either player. For example...
+The score for each player is computed by the number of tiles that the player has "won". The score value for each tile is the number of mable spaces on that tile (i.e. a tile with six spaces is worth six points). A player wins a tile by having the majority of marbles on that tile at the end of the game. Tiles that are tied are worth no points for either player. For example...
 
 - On a six point tile, the red player has 3 marbles and the black player has 2 marbles - the red player earns 6 points and the black player earns 0 points.
 - On a six point tile, the red player has 3 marbles and the black player has 3 marbles - both players earn 0 points.
+- On a six point tile, the red player has 1 marbles and the black player has no marbles - the red player earns 6 points and the black player earns 0 points.
 - On a three point tile, the black player has 2 marbles and the red player has 1 marble - the black player earns 3 points and the red player earns 0 points.
 - On a three point tile, the black player has 3 marbles and the red player has no marbles - the black player earns 3 points and the red player earns 0 points.
 
