@@ -1,31 +1,51 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
 import Board from './game/Board'
-import Piece from './game/Piece'
 import Game from './game/Game'
 import PlayerScore from './PlayerScore'
 import './World.css'
 
-const initialBoard = new Board()
-initialBoard.addPiece(new Piece(3, 0, 1, 3))
-initialBoard.addPiece(new Piece(4, 1, 2, 2))
-initialBoard.addPiece(new Piece(6, 1, 2, 2))
-initialBoard.addPiece(new Piece(8, 1, 2, 3))
-initialBoard.addPiece(new Piece(0, 4, 1, 2))
-initialBoard.addPiece(new Piece(1, 3, 2, 2))
-initialBoard.addPiece(new Piece(1, 5, 2, 2))
-initialBoard.addPiece(new Piece(3, 3, 3, 1))
-initialBoard.addPiece(new Piece(6, 3, 2, 1))
-initialBoard.addPiece(new Piece(3, 4, 3, 2))
-initialBoard.addPiece(new Piece(6, 4, 2, 2))
-initialBoard.addPiece(new Piece(8, 4, 2, 1))
-initialBoard.addPiece(new Piece(3, 6, 3, 2))
-initialBoard.addPiece(new Piece(6, 6, 1, 3))
-initialBoard.addPiece(new Piece(7, 6, 1, 2))
-initialBoard.addPiece(new Piece(3, 8, 3, 1))
-initialBoard.addPiece(new Piece(8, 5, 2, 3))
+const BOARD_A = new Board([
+  [3, 0, 1, 3],
+  [4, 1, 2, 2],
+  [6, 1, 2, 2],
+  [8, 1, 2, 3],
+  [0, 4, 1, 2],
+  [1, 3, 2, 2],
+  [1, 5, 2, 2],
+  [3, 3, 3, 1],
+  [6, 3, 2, 1],
+  [3, 4, 3, 2],
+  [6, 4, 2, 2],
+  [8, 4, 2, 1],
+  [3, 6, 3, 2],
+  [6, 6, 1, 3],
+  [7, 6, 1, 2],
+  [3, 8, 3, 1],
+  [8, 5, 2, 3],
+])
 
-const initialGame = new Game({ board: initialBoard })
+const BOARD_B = new Board([
+  [0, 0, 2, 2],
+  [2, 0, 1, 2],
+  [3, 0, 2, 3],
+  [5, 0, 3, 1],
+  [0, 2, 1, 3],
+  [1, 2, 2, 2],
+  [5, 1, 1, 2],
+  [6, 1, 2, 2],
+  [3, 3, 3, 2],
+  [6, 3, 2, 2],
+  [1, 4, 2, 3],
+  [0, 5, 1, 3],
+  [1, 7, 2, 1],
+  [3, 5, 2, 3],
+  [5, 5, 2, 2],
+  [5, 7, 2, 1],
+  [7, 5, 1, 3],
+])
+
+const initialGame = new Game({ board: BOARD_A })
 
 function World() {
   const [game, setGame] = useState(initialGame)

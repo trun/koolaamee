@@ -1,3 +1,5 @@
+import Piece from './Piece'
+
 const COLS = 10
 
 const xyToOffset = (x, y) => {
@@ -11,12 +13,14 @@ const offsetToXY = (offset) => {
 }
 
 class Board {
-  constructor() {
+  constructor(pieces = []) {
     this.pieces = []
     this.pieceGrid = []
 
     this.marbles = []
     this.marbleGrid = []
+
+    pieces.forEach(([x, y, w, h]) => this.addPiece(new Piece(x, y, w, h)))
   }
 
   getPieces = () => {
@@ -54,7 +58,7 @@ class Board {
   addPiece = (piece) => {
     // check validity
     if (!this.isValid(piece)) {
-      console.error('Cannot place overlapping piece')
+      console.error(`Cannot place overlapping piece: ${piece.toString()}`)
       return
     }
 
