@@ -41,6 +41,6 @@ There is currently only one static board included in the code. One of the intere
 ## Local Development
 
 ```
-$ yarn install
-$ yarn start
+$ npm install
+$ npm run start
 ```
