@@ -2,7 +2,7 @@
 
 A Javascript clone of a fun marble placement board game. Play with two players or against an AI.
 
-![Screen Recording 2021-12-13 at 11 19 50 AM](https://p79.f0.n0.cdn.getcloudapp.com/items/bLudXYnn/d7990988-9e77-4565-8471-330fda437158.gif?source=viewer&v=59d0c58712e7263ff8d81de8c95046ab)
+<img src="https://github.com/user-attachments/assets/141b8fc7-6365-4c74-b442-a8b7bc5232df" width="50%">
 
 ## Rules
 
